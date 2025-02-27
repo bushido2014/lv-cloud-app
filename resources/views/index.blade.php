@@ -5,7 +5,7 @@
 </head>
 <body>
 <header class="py-4 px-2 bg-gray-800 text-white">
-    <div class="max-w-6xl mx-auto flex justify-between items-center">
+    <div class="container mx-auto flex justify-between items-center">
         <!-- Logo / Home -->
         <a href="/" class="text-lg font-semibold hover:text-gray-300">Home</a>
 
@@ -32,7 +32,7 @@
     </div>
 </header>
 
-    <div class="max-w-7xl mx-auto px-4 py-3">
+    <div class="container mx-auto px-4 py-3">
     <h1 class="mt-2 text-3xl font-medium tracking-tight text-gray-950 dark:text-white">Home Page</h1>
     </div>
 </body>
