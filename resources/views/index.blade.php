@@ -4,8 +4,8 @@
     @include('partials.head', ['title' => 'Home'])  
 </head>
 <body>
-<header class="py-4 px-2">
-<div class="container mx-auto bg-sky-800 text-white">
+<header class="py-4 px-2 bg-gray-800">
+<div class="container mx-auto text-white">
 <a href="/">Home</a>
 </div>
 </header>
