@@ -17,7 +17,7 @@ class ProjectFactory extends Factory
         return [
             'title' => $this->faker->sentence(3),
             'description' => $this->faker->paragraph(),
-            'image' => 'images/' . $this->faker->image('public/storage/images', 640, 480, null, false)
+            'image' => 'storage/images/' . basename($this->faker->image(storage_path('app/public/images'), 640, 480, null, false)),
         ];
     }
 }
