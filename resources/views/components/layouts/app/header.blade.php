@@ -98,7 +98,7 @@
             <a href="{{ route('dashboard') }}" class="ml-1 flex items-center space-x-2" wire:navigate>
                 <x-app-logo class="size-8" href="#"></x-app-logo>
             </a>
-            <a href="{{ route('projects.index) }}" class="ml-1 flex items-center space-x-2" wire:navigate>
+            <a href="{{ route('projects.index') }}" class="ml-1 flex items-center space-x-2" wire:navigate>
                 <x-app-logo class="size-8" href="#"></x-app-logo>
             </a>
 
