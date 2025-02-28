@@ -15,7 +15,7 @@
                 <flux:navbar.item icon="layout-grid" href="{{ route('dashboard') }}" :current="request()->routeIs('dashboard')" wire:navigate>
                     {{ __('Dashboard') }}
                 </flux:navbar.item>
-                <flux:navbar.item icon="document" href="{{ route('projects') }}" :current="request()->routeIs('projects')" wire:navigate>
+                <flux:navbar.item icon="document" href="{{ route('projects.index') }}" :current="request()->routeIs('projects.index')" wire:navigate>
                     {{ __('Projects') }}
                 </flux:navbar.item>
             </flux:navbar>
@@ -98,11 +98,17 @@
             <a href="{{ route('dashboard') }}" class="ml-1 flex items-center space-x-2" wire:navigate>
                 <x-app-logo class="size-8" href="#"></x-app-logo>
             </a>
+            <a href="{{ route('projects.index) }}" class="ml-1 flex items-center space-x-2" wire:navigate>
+                <x-app-logo class="size-8" href="#"></x-app-logo>
+            </a>
 
             <flux:navlist variant="outline">
                 <flux:navlist.group heading="Platform">
                     <flux:navlist.item icon="layout-grid" href="{{ route('dashboard') }}" :current="request()->routeIs('dashboard')" wire:navigate>
                     {{ __('Dashboard') }}
+                    </flux:navlist.item>
+                    <flux:navlist.item icon="layout-grid" href="{{ route('projects.index') }}" :current="request()->routeIs('projects.index')" wire:navigate>
+                    {{ __('Projects') }}
                     </flux:navlist.item>
                 </flux:navlist.group>
             </flux:navlist>
