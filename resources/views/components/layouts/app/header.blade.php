@@ -15,6 +15,9 @@
                 <flux:navbar.item icon="layout-grid" href="{{ route('dashboard') }}" :current="request()->routeIs('dashboard')" wire:navigate>
                     {{ __('Dashboard') }}
                 </flux:navbar.item>
+                <flux:navbar.item icon="document" href="{{ route('projects') }}" :current="request()->routeIs('projects')" wire:navigate>
+                    {{ __('Projects') }}
+                </flux:navbar.item>
             </flux:navbar>
 
             <flux:spacer />
