@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Projects\ShowProjects;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 use App\Http\Controllers\HomeController;
@@ -12,6 +13,7 @@ Route::view('dashboard', 'dashboard')
     ->name('dashboard');
 
 Route::middleware(['auth'])->group(function () {
+    Route::get('/projects', ShowProjects::class);
     Route::redirect('settings', 'settings/profile');
 
     Volt::route('settings/profile', 'settings.profile')->name('settings.profile');
