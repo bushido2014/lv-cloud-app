@@ -3,8 +3,10 @@
 namespace App\Livewire\Projects;
 
 use Livewire\Component;
+use Flux;
 use Livewire\WithFileUploads;
 use App\Models\Project;
+
 
 class ShowProjects extends Component
 {
@@ -41,7 +43,8 @@ class ShowProjects extends Component
             'image' => $imagePath,
         ]);
 
-        session()->flash('message', 'Project created successfully.');
+        //session()->flash('message', 'Project created successfully.');
+        Flux::toast(variant: 'success', message:'Project created successfully');
         $this->resetFields();
 
         
@@ -80,14 +83,16 @@ class ShowProjects extends Component
             'image' => $imagePath,
         ]);
 
-        session()->flash('message', 'Project updated successfully.');
+        //session()->flash('message', 'Project updated successfully.');
+        Flux::toast(variant: 'success', message:'Project created successfully');
         $this->resetFields();
     }
 
     public function delete($id)
     {
         Project::findOrFail($id)->delete();
-        session()->flash('message', 'Project deleted successfully.');
+        Flux::toast(variant: 'success', message:'Project created successfully');
+        //session()->flash('message', 'Project deleted successfully.');
     }
 
     private function resetFields()
