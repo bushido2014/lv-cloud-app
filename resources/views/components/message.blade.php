@@ -10,15 +10,3 @@
     </div>
 @endif
 
-<script>
-        document.addEventListener('livewire:load', function () {
-            Livewire.on('hide-message', function () {
-                setTimeout(() => {
-                    let messageBox = document.getElementById('message-box');
-                    if (messageBox) {
-                        messageBox.style.display = 'none';
-                    }
-                }, 3000); 
-            });
-        });
-    </script>
