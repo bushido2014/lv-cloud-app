@@ -129,5 +129,6 @@
         {{ $slot }}
 
         @fluxScripts
+        <flux:toast position="bottom right" class="pb-24" />
     </body>
 </html>
