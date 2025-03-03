@@ -1,5 +1,5 @@
 <div class="container mx-auto p-4">
-    <h1 class="text-2xl font-bold mb-4">Projects</h1>
+     <flux:heading size="xl" class="mb-1">Projects</flux:heading>
 
     <form wire:submit.prevent="{{ $isEditing ? 'update' : 'store' }}" enctype="multipart/form-data">
         <input type="text" wire:model="title" placeholder="Title" class="border p-2 w-full">
