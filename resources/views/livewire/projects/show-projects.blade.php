@@ -16,9 +16,9 @@
 
         <!-- Previzualizare imagine înainte de upload -->
         @if ($image)
-            <img src="{{ $image->temporaryUrl() }}" class="mt-2 w-64 h-64 rounded">
+            <img src="{{ $image->temporaryUrl() }}" class="mt-2 w-64 h-64 object-cover rounded">
         @elseif ($isEditing && $projectId)
-            <img src="{{ asset('storage/' . \App\Models\Project::find($projectId)->image) }}" class="mt-2 w-64 h-64 rounded">
+            <img src="{{ asset('storage/' . \App\Models\Project::find($projectId)->image) }}" class="mt-2 object-cover w-64 h-64 rounded">
         @endif
         
         <flux:button variant="primary" type="submit"> {{ $isEditing ? 'Update' : 'Create' }}</flux:button>
@@ -35,7 +35,8 @@
                 @if ($project->image)
                     <img src="{{ asset('storage/' . $project->image) }}" class="mt-2 w-full rounded">
                 @endif
-                <flux:button variant="filled" wire:click="edit({{ $project->id }})">Edit</flux:button>
+
+                <flux:button  wire:click="edit({{ $project->id }})">Edit</flux:button>
                 <flux:button variant="danger" 
                 wire:confirm="Are you sure you want to delete this project?"
                 wire:click="delete({{ $project->id }})">Delete</flux:button>
