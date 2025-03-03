@@ -11,18 +11,16 @@
         <flux:textarea label="Add Description" wire:model="description" placeholder="Description" rows="3" />
         </flux:field>
         <flux:field>
-        <flux:input type="file" wire:model="image" label="Upload Image"/>     
+        <flux:input type="file" wire:model="image" label="Upload Image"  />     
         </flux:field>
 
         <!-- Previzualizare imagine înainte de upload -->
-        <!-- @if ($image)
-            <img src="{{ $image->temporaryUrl() }}" class="mt-2 w-full rounded">
+        @if ($image)
+            <img src="{{ $image->temporaryUrl() }}" class="mt-2 w-64 h-64 rounded">
         @elseif ($isEditing && $projectId)
-            <img src="{{ asset('storage/' . \App\Models\Project::find($projectId)->image) }}" class="mt-2 w-full rounded">
-        @endif -->
-        @if ($project->image)
-    <img src="{{ asset('storage/' . $project->image) }}" class="mt-2 w-full rounded">
-@endif
+            <img src="{{ asset('storage/' . \App\Models\Project::find($projectId)->image) }}" class="mt-2 w-64 h-64 rounded">
+        @endif
+      
 
         <!-- <button type="submit" class="bg-blue-500 text-white p-2 mt-2">
             {{ $isEditing ? 'Update' : 'Create' }}
