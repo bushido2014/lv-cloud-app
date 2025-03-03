@@ -43,6 +43,10 @@ class ShowProjects extends Component
 
         session()->flash('message', 'Project created successfully.');
         $this->resetFields();
+        
+        //remove message
+        $this->dispatch('hide-message')->self();
+        
     }
 
     public function edit($id)
