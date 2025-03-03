@@ -44,5 +44,5 @@
         @endforeach
     </div>
 
-    <flux:toast position="bottom right" class="pb-24" />
+   
 </div>
