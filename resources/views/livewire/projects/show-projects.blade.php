@@ -20,11 +20,6 @@
         @elseif ($isEditing && $projectId)
             <img src="{{ asset('storage/' . \App\Models\Project::find($projectId)->image) }}" class="mt-2 w-64 h-64 rounded">
         @endif
-      
-
-        <!-- <button type="submit" class="bg-blue-500 text-white p-2 mt-2">
-            {{ $isEditing ? 'Update' : 'Create' }}
-        </button> -->
         
         <flux:button variant="primary" type="submit"> {{ $isEditing ? 'Update' : 'Create' }}</flux:button>
          </div>
