@@ -36,7 +36,9 @@
                     <img src="{{ asset('storage/' . $project->image) }}" class="mt-2 w-full rounded">
                 @endif
                 <flux:button variant="filled" wire:click="edit({{ $project->id }})">Edit</flux:button>
-                <flux:button variant="danger" wire:click="delete({{ $project->id }})">Delete</flux:button>
+                <flux:button variant="danger" 
+                wire:confirm="Are you sure you want to delete this project?"
+                wire:click="delete({{ $project->id }})">Delete</flux:button>
             </div>
         @endforeach
     </div>
