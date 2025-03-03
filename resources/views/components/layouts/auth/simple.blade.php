@@ -17,7 +17,11 @@
                 </div>
             </div>
         </div>
-        @fluxScripts
+        @persist('toast')
         <flux:toast position="bottom right" class="pb-24" />
+    @endpersist
+    
+        @fluxScripts
+        
     </body>
 </html>
