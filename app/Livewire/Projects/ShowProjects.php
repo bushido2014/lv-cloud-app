@@ -3,10 +3,13 @@
 namespace App\Livewire\Projects;
 
 use Livewire\Component;
+use Livewire\WithFileUploads;
 use App\Models\Project;
 
 class ShowProjects extends Component
 {
+    use WithFileUploads;
+
     public $projects, $title, $description, $image, $projectId;
     public $isEditing = false;
 
@@ -27,13 +30,15 @@ class ShowProjects extends Component
         $this->validate([
             'title' => 'required|string|max:255',
             'description' => 'required',
-            'image' => 'nullable|string',
+            'image' => 'nullable|image|max:2048', // Imagine max 2MB
         ]);
+
+        $imagePath = $this->image ? $this->image->store('projects', 'public') : null;
 
         Project::create([
             'title' => $this->title,
             'description' => $this->description,
-            'image' => $this->image,
+            'image' => $imagePath,
         ]);
 
         session()->flash('message', 'Project created successfully.');
@@ -46,7 +51,7 @@ class ShowProjects extends Component
         $this->projectId = $project->id;
         $this->title = $project->title;
         $this->description = $project->description;
-        $this->image = $project->image;
+        $this->image = null; 
         $this->isEditing = true;
     }
 
@@ -55,14 +60,21 @@ class ShowProjects extends Component
         $this->validate([
             'title' => 'required|string|max:255',
             'description' => 'required',
-            'image' => 'nullable|string',
+            'image' => 'nullable|image|max:2048',
         ]);
 
         $project = Project::findOrFail($this->projectId);
+
+        if ($this->image) {
+            $imagePath = $this->image->store('projects', 'public');
+        } else {
+            $imagePath = $project->image;
+        }
+
         $project->update([
             'title' => $this->title,
             'description' => $this->description,
-            'image' => $this->image,
+            'image' => $imagePath,
         ]);
 
         session()->flash('message', 'Project updated successfully.');
@@ -79,7 +91,7 @@ class ShowProjects extends Component
     {
         $this->title = '';
         $this->description = '';
-        $this->image = '';
+        $this->image = null;
         $this->projectId = null;
         $this->isEditing = false;
     }
