@@ -34,7 +34,7 @@ class ShowProjects extends Component
         ]);
 
         $imagePath = $this->image ? $this->image->store('projects', 'public') : null;
-
+      
         Project::create([
             'title' => $this->title,
             'description' => $this->description,

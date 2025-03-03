@@ -15,11 +15,14 @@
         </flux:field>
 
         <!-- Previzualizare imagine înainte de upload -->
-        @if ($image)
+        <!-- @if ($image)
             <img src="{{ $image->temporaryUrl() }}" class="mt-2 w-full rounded">
         @elseif ($isEditing && $projectId)
             <img src="{{ asset('storage/' . \App\Models\Project::find($projectId)->image) }}" class="mt-2 w-full rounded">
-        @endif
+        @endif -->
+        @if ($project->image)
+    <img src="{{ asset('storage/' . $project->image) }}" class="mt-2 w-full rounded">
+@endif
 
         <!-- <button type="submit" class="bg-blue-500 text-white p-2 mt-2">
             {{ $isEditing ? 'Update' : 'Create' }}
