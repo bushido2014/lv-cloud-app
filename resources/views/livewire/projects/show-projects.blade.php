@@ -16,13 +16,10 @@
 
         <!-- Previzualizare imagine înainte de upload -->
         @if ($image)
-            <img src="{{ $image->temporaryUrl() }}" class="mt-2 w-64 h-64 object-cover rounded">
-            @elseif ($isEditing && $existingImage)
+    <img src="{{ $image->temporaryUrl() }}" class="mt-2 w-64 h-64 object-cover rounded">
+@elseif ($isEditing && $existingImage)
     <img src="{{ asset('storage/' . $existingImage) }}" class="mt-2 object-cover w-64 h-64 rounded">
 @endif
-        <!-- @elseif ($isEditing && $projectId)
-            <img src="{{ asset('storage/' . \App\Models\Project::find($projectId)->image) }}" class="mt-2 object-cover w-64 h-64 rounded">
-        @endif -->
         
         <flux:button variant="primary" type="submit"> {{ $isEditing ? 'Update' : 'Create' }}</flux:button>
          </div>
@@ -64,7 +61,8 @@
         <p>Are you sure you want to delete this project?</p>
         <div class="mt-4 flex justify-end">
        
-        <flux:button @dispatch('deleteProject', projectId: $projectId) variant="danger">     
+        <flux:button @dispatch('deleteProject', projectId: $projectId) variant="danger">
+                     
     Delete
 </flux:button>
             <flux:button modal-close class="ml-2 px-4 py-2">Cancel</flux:button>
