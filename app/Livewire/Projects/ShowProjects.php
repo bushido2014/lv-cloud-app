@@ -7,12 +7,11 @@ use Livewire\WithFileUploads;
 use App\Models\Project;
 use Illuminate\Support\Facades\Storage;
 
-
 class ShowProjects extends Component
 {
     use WithFileUploads;
 
-    public $title, $description, $image, $projectId;
+    public $title, $description, $image, $projectId, $existingImage;
     public $isEditing = false;
 
     public function render()
@@ -54,8 +53,7 @@ class ShowProjects extends Component
         $this->projectId = $project->id;
         $this->title = $project->title;
         $this->description = $project->description;
-        //$this->image = null;
-        $this->existingImage = $project->image;
+        $this->existingImage = $project->image; // Setează imaginea existentă
         $this->isEditing = true;
     }
 
@@ -70,7 +68,6 @@ class ShowProjects extends Component
         $project = Project::findOrFail($this->projectId);
 
         if ($this->image) {
-            // Șterge imaginea veche dacă există
             if ($project->image) {
                 Storage::disk('public')->delete($project->image);
             }
@@ -93,18 +90,13 @@ class ShowProjects extends Component
     {
         $project = Project::findOrFail($id);
 
-        // Șterge imaginea asociată dacă există
         if ($project->image) {
             Storage::disk('public')->delete($project->image);
         }
 
         $project->delete();
         session()->flash('message', 'Project deleted successfully.');
-
-        
     }
-
-    
 
     private function resetFields()
     {
@@ -112,6 +104,7 @@ class ShowProjects extends Component
         $this->description = '';
         $this->image = null;
         $this->projectId = null;
+        $this->existingImage = null; // Resetare corectă a imaginii existente
         $this->isEditing = false;
     }
 }

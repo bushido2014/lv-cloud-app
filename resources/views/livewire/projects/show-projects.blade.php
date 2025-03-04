@@ -21,8 +21,10 @@
     <img src="{{ asset('storage/' . $existingImage) }}" class="mt-2 object-cover w-64 h-64 rounded">
 @endif
         
-        <flux:button variant="primary" type="submit"> {{ $isEditing ? 'Update' : 'Create' }}</flux:button>
+        <flux:button  variant="primary" type="submit"> {{ $isEditing ? 'Update' : 'Create' }}</flux:button>
          </div>
+         
+
     </form>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
@@ -39,19 +41,19 @@
                     <img src="{{ asset('storage/' . $project->image) }}" class="mt-2 w-full rounded">
                 @endif
                 <div class="flex gap-4 pt-2">
-                <flux:button  wire:click="edit({{ $project->id }})">Edit</flux:button>
+                <flux:button  icon="pencil-square"  wire:click="edit({{ $project->id }})">Edit</flux:button>
 
                <flux:button variant="danger" 
                 wire:confirm="Are you sure you want to delete this project?"
                 wire:click="delete({{ $project->id }})">Delete</flux:button>
-
-                <flux:button  wire:click="edit({{ $project->id }})">Edit</flux:button>
-               
+            </div>
+        </div>      
+            @endforeach     
               
     </div>
-        @endforeach
-    </div>
-
+        
+   
+   
    
 
 </div>
