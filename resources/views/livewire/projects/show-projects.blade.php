@@ -27,10 +27,13 @@
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
         @foreach ($projects as $project)
-        
-                <h2 class="text-lg font-semibold">{{ $project->title }}</h2>
+        <flux:card>
+            <flux:heading size="lg">   
+               {{ $project->title }}
+                </flux:heading>
+                <flux:subheading class="mb-4">
                 <p class="text-gray-600">{{ $project->description }}</p>
-
+                </flux:subheading>
                 <!-- Afișare imagine salvată -->
                 @if ($project->image)
                     <img src="{{ asset('storage/' . $project->image) }}" class="mt-2 w-full rounded">
@@ -41,7 +44,7 @@
                 wire:confirm="Are you sure you want to delete this project?"
                 wire:click="delete({{ $project->id }})">Delete</flux:button>
                 </div>
-     
+            </flux:card>
 
         @endforeach
     </div>
