@@ -3,23 +3,22 @@
 namespace App\Livewire\Projects;
 
 use Livewire\Component;
-
 use Livewire\WithFileUploads;
 use App\Models\Project;
-
+use Illuminate\Support\Facades\Storage;
 
 class ShowProjects extends Component
 {
     use WithFileUploads;
 
-    // public $projects, $title, $description, $image, $projectId;
-    // public $isEditing = false;
-    public $title, $description, $image, $isEditing = false, $projectId;
+    public $title, $description, $image, $projectId;
+    public $isEditing = false;
 
     public function render()
     {
-        $this->projects = Project::all();
-        return view('livewire.projects.show-projects');
+        return view('livewire.projects.show-projects', [
+            'projects' => Project::all(),
+        ]);
     }
 
     public function create()
@@ -30,26 +29,8 @@ class ShowProjects extends Component
 
     public function store()
     {
-        /*$this->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required',
-            'image' => 'nullable|image|max:2048', // Imagine max 2MB
-        ]);
-
-        $imagePath = $this->image ? $this->image->store('projects', 'public') : null;
-      
-        Project::create([
-            'title' => $this->title,
-            'description' => $this->description,
-            'image' => $imagePath,
-        ]);
-
-        session()->flash('message', 'Project created successfully.');
-       
-        $this->resetFields();*/
-        
         $this->validate([
-            'title' => 'required',
+            'title' => 'required|string|max:255',
             'description' => 'required',
             'image' => 'nullable|image|max:2048',
         ]);
@@ -62,11 +43,8 @@ class ShowProjects extends Component
             'image' => $imagePath,
         ]);
 
-        $this->reset(['title', 'description', 'image']);
         session()->flash('message', 'Project created successfully.');
-
-        
-        
+        $this->resetFields();
     }
 
     public function edit($id)
@@ -75,7 +53,7 @@ class ShowProjects extends Component
         $this->projectId = $project->id;
         $this->title = $project->title;
         $this->description = $project->description;
-        $this->image = null; 
+        $this->image = null;
         $this->isEditing = true;
     }
 
@@ -90,6 +68,10 @@ class ShowProjects extends Component
         $project = Project::findOrFail($this->projectId);
 
         if ($this->image) {
+            // Șterge imaginea veche dacă există
+            if ($project->image) {
+                Storage::disk('public')->delete($project->image);
+            }
             $imagePath = $this->image->store('projects', 'public');
         } else {
             $imagePath = $project->image;
@@ -102,30 +84,20 @@ class ShowProjects extends Component
         ]);
 
         session()->flash('message', 'Project updated successfully.');
-        
         $this->resetFields();
     }
 
     public function delete($id)
     {
-        // Project::findOrFail($id)->delete();
-        // session()->flash('message', 'Project deleted successfully.');
-        $project = Project::find($id);
+        $project = Project::findOrFail($id);
 
-    if (!$project) {
-        session()->flash('message', 'Project not found.');
-        return;
-    }
+        // Șterge imaginea asociată dacă există
+        if ($project->image) {
+            Storage::disk('public')->delete($project->image);
+        }
 
-    // Șterge imaginea dacă există
-    if ($project->image) {
-        Storage::disk('public')->delete($project->image);
-    }
-
-    $project->delete();
-
-    session()->flash('message', 'Project deleted successfully.');
-
+        $project->delete();
+        session()->flash('message', 'Project deleted successfully.');
     }
 
     private function resetFields()
@@ -137,4 +109,3 @@ class ShowProjects extends Component
         $this->isEditing = false;
     }
 }
-
