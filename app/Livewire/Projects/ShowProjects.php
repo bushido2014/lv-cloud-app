@@ -54,7 +54,8 @@ class ShowProjects extends Component
         $this->projectId = $project->id;
         $this->title = $project->title;
         $this->description = $project->description;
-        $this->image = null;
+        //$this->image = null;
+        $this->existingImage = $project->image;
         $this->isEditing = true;
     }
 
