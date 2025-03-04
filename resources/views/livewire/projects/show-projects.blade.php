@@ -40,22 +40,20 @@
                 @endif
                 <div class="flex gap-4 pt-2">
                 <flux:button  wire:click="edit({{ $project->id }})">Edit</flux:button>
-                
+
                 <!-- <flux:button variant="danger" 
                 wire:confirm="Are you sure you want to delete this project?"
                 wire:click="delete({{ $project->id }})">Delete</flux:button> -->
 
                 <flux:button  wire:click="edit({{ $project->id }})">Edit</flux:button>
                 <flux:button variant="danger" 
-                wire:click="$emit('openModal', 'confirmDelete', {{ $project->id }})" ">Delete</flux:button>
+                wire:click="$emit('openModal', 'confirmDelete', {{ $project->id }})">Delete</flux:button>
                 </div>
     </div>
         @endforeach
     </div>
 
-   
-</div>
-<flux:modal name="confirmDelete">
+    <flux:modal name="confirmDelete">
     <div class="p-6">
         <h2 class="text-lg font-semibold">Confirm Deletion</h2>
         <p>Are you sure you want to delete this project?</p>
@@ -66,4 +64,6 @@
             <flux:button modal-close class="ml-2 px-4 py-2">Cancel</flux:button>
         </div>
     </div>
-</flux:modal>
+</flux:modal>  
+</div>
+
