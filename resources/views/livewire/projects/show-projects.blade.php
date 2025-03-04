@@ -27,7 +27,7 @@
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
         @foreach ($projects as $project)
-        <flux:card>
+        <div class="p-6 rounded-xl bg-white dark:bg-white/10 border border-zinc-200 dark:border-white/10 space-y-6">
             <flux:heading size="lg">   
                {{ $project->title }}
                 </flux:heading>
@@ -44,8 +44,7 @@
                 wire:confirm="Are you sure you want to delete this project?"
                 wire:click="delete({{ $project->id }})">Delete</flux:button>
                 </div>
-            </flux:card>
-
+    </div>
         @endforeach
     </div>
 
