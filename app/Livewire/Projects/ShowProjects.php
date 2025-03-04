@@ -104,10 +104,10 @@ class ShowProjects extends Component
     }
 
     #[On('deleteProject')]
-    public function handleDelete()
-    {
-        $this->delete(request()->project_id);
-    }
+      public function handleDelete($projectId)
+     {
+        $this->delete($projectId);
+      }
 
     private function resetFields()
     {
