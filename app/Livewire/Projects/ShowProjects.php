@@ -12,8 +12,9 @@ class ShowProjects extends Component
 {
     use WithFileUploads;
 
-    public $projects, $title, $description, $image, $projectId;
-    public $isEditing = false;
+    // public $projects, $title, $description, $image, $projectId;
+    // public $isEditing = false;
+    public $title, $description, $image, $isEditing = false, $projectId;
 
     public function render()
     {
@@ -29,7 +30,7 @@ class ShowProjects extends Component
 
     public function store()
     {
-        $this->validate([
+        /*$this->validate([
             'title' => 'required|string|max:255',
             'description' => 'required',
             'image' => 'nullable|image|max:2048', // Imagine max 2MB
@@ -45,7 +46,24 @@ class ShowProjects extends Component
 
         session()->flash('message', 'Project created successfully.');
        
-        $this->resetFields();
+        $this->resetFields();*/
+        
+        $this->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'image' => 'nullable|image|max:2048',
+        ]);
+
+        $imagePath = $this->image ? $this->image->store('projects', 'public') : null;
+
+        Project::create([
+            'title' => $this->title,
+            'description' => $this->description,
+            'image' => $imagePath,
+        ]);
+
+        $this->reset(['title', 'description', 'image']);
+        session()->flash('message', 'Project created successfully.');
 
         
         
@@ -90,9 +108,24 @@ class ShowProjects extends Component
 
     public function delete($id)
     {
-        Project::findOrFail($id)->delete();
-      
-        session()->flash('message', 'Project deleted successfully.');
+        // Project::findOrFail($id)->delete();
+        // session()->flash('message', 'Project deleted successfully.');
+        $project = Project::find($id);
+
+    if (!$project) {
+        session()->flash('message', 'Project not found.');
+        return;
+    }
+
+    // Șterge imaginea dacă există
+    if ($project->image) {
+        Storage::disk('public')->delete($project->image);
+    }
+
+    $project->delete();
+
+    session()->flash('message', 'Project deleted successfully.');
+
     }
 
     private function resetFields()
