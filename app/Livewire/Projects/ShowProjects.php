@@ -6,6 +6,7 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 use App\Models\Project;
 use Illuminate\Support\Facades\Storage;
+use Livewire\Attributes\On;
 
 class ShowProjects extends Component
 {
@@ -98,6 +99,14 @@ class ShowProjects extends Component
 
         $project->delete();
         session()->flash('message', 'Project deleted successfully.');
+
+        $this->dispatch('closeModal', 'confirmDelete');
+    }
+
+    #[On('deleteProject')]
+    public function handleDelete()
+    {
+        $this->delete(request()->project_id);
     }
 
     private function resetFields()
